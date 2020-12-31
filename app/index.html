@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/libs.min.css">
+    <link rel="stylesheet" href="css/style.min.css">
+</head>
+<body>
+    {
+        "name": "start-gulp",
+        "version": "1.0.0",
+        "description": "",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "Igor Buksha",
+        "license": "ISC",
+        "devDependencies": {
+          "browser-sync": "^2.26.13",
+          "gulp": "^4.0.2",
+          "gulp-autoprefixer": "^7.0.1",
+          "gulp-cssmin": "^0.2.0",
+          "gulp-rename": "^2.0.0",
+          "gulp-sass": "^4.1.0",
+          "magnific-popup": "^1.1.0",
+          "normalize.css": "^8.0.1",
+          "slick-carousel": "^1.8.1"
+        },
+        "dependencies": {
+          "gulp-concat": "^2.6.1",
+          "gulp-uglify": "^3.0.2"
+        }
+      }
+      
+
+
+
+      
+      let gulp = require('gulp'),
+      sass = require('gulp-sass'),
+      rename = require('gulp-rename'),
+      browserSync = require('browser-sync'),
+      autoprefixer = require('gulp-autoprefixer'),
+      concat = require('gulp-concat'),
+      uglify = require('gulp-uglify');
+      cssmin = requier('gulp-cssmin')
+  
+  
+  gulp.task('sass', function(){
+     return gulp.src('app/scss/style.scss')
+              .pipe(sass({outputStyle: 'compressed'}))
+              .pipe(rename({suffix : '.min'}))
+              .pipe(autoprefixer({
+                  overrideBrowserslist: ['last 8 versions']
+              }))
+              .pipe(gulp.dest('app/css'))
+              .pipe(browserSync.reload({stream: true}))
+  });
+  
+  gulp.task('style', function(){
+      return gulp.src([
+          'node_modules/slick-carousel/slick/slick.css',
+          'node_modules/magnific-popup/dist/jquery.magnific-popup.css'
+      ])
+         .pipe(concat('libs.min.css'))
+         .pipe(cssmin())
+         .pipe(gulp.dest('app/css'))
+  
+  });
+  
+  
+  
+  gulp.task('script', function(){
+      return gulp.src([
+          'node_modules/slick-carousel/slick/slick.js',
+          'node_modules/magnific-popup/dist/jquery.magnific-popup.js'
+      ])
+         .pipe(concat('libs.min.js'))
+         .pipe(uglify())
+         .pipe(gulp.dest('app/js'))
+  
+  });
+  
+  
+  
+  gulp.task('html', function(){
+     return gulp.src('app/*.html')
+      .pipe(browserSync.reload({stream: true}))
+  });
+  
+  gulp.task('js', function(){
+     return gulp.src('app/*.js')
+      .pipe(browserSync.reload({stream: true}))
+  });
+  
+  
+  
+  gulp.task('browser-sync', function() {
+      browserSync.init({
+          server: {
+              baseDir: "app/"
+          }
+      });
+  });
+  
+  
+  gulp.task('watch', function(){
+      gulp.watch('app/scss/style.scss', gulp.parallel('sass'));
+      gulp.watch('app/*.html', gulp.parallel('html'));
+      gulp.watch('app/js/*.js', gulp.parallel('js'));
+  
+  });
+  
+  gulp.task('default', gulp.parallel('style', 'script', 'sass', 'watch', 'browser-sync'))
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/libs.min.js"></script>
+    <script src="js/main.min.js"></script>
+</body>
+</html>
