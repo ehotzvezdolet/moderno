@@ -1,120 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/libs.min.css">
     <link rel="stylesheet" href="css/style.min.css">
+    
 </head>
+
 <body>
-    {
-        "name": "start-gulp",
-        "version": "1.0.0",
-        "description": "",
-        "main": "index.js",
-        "scripts": {
-          "test": "echo \"Error: no test specified\" && exit 1"
-        },
-        "author": "Igor Buksha",
-        "license": "ISC",
-        "devDependencies": {
-          "browser-sync": "^2.26.13",
-          "gulp": "^4.0.2",
-          "gulp-autoprefixer": "^7.0.1",
-          "gulp-cssmin": "^0.2.0",
-          "gulp-rename": "^2.0.0",
-          "gulp-sass": "^4.1.0",
-          "magnific-popup": "^1.1.0",
-          "normalize.css": "^8.0.1",
-          "slick-carousel": "^1.8.1"
-        },
-        "dependencies": {
-          "gulp-concat": "^2.6.1",
-          "gulp-uglify": "^3.0.2"
-        }
-      }
-      
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="header__top-inner">
+                    <div class="header__logo">
+                        <a href="#">
+                            <img src="images/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="header__text">
+                        <a href=""><span>Need help?</span>
+                        </a> Talk to an expert:
+                        <a class="header__phone" href="tel:61383766284">+61 3 8376
+                            6284</a>
+                    </div>
+                    <div class="header__box">
+                        <a class="basket" href="#"></a>
+                        <a href="#" class="header__btn header__btn-login">Login</a>
+                        <a href="#" class="header__btn header__btn-register">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__menu">
+            <div class="container">
+                <div class="menu">
+                    <ul class="menu__list">
+                        <li>
+                            <a href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                WordPress
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Joomla
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                PSD
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Plugins
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Components
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Pages
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Contact
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Help
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
 
 
-      
-      let gulp = require('gulp'),
-      sass = require('gulp-sass'),
-      rename = require('gulp-rename'),
-      browserSync = require('browser-sync'),
-      autoprefixer = require('gulp-autoprefixer'),
-      concat = require('gulp-concat'),
-      uglify = require('gulp-uglify');
-      cssmin = requier('gulp-cssmin')
-  
-  
-  gulp.task('sass', function(){
-     return gulp.src('app/scss/style.scss')
-              .pipe(sass({outputStyle: 'compressed'}))
-              .pipe(rename({suffix : '.min'}))
-              .pipe(autoprefixer({
-                  overrideBrowserslist: ['last 8 versions']
-              }))
-              .pipe(gulp.dest('app/css'))
-              .pipe(browserSync.reload({stream: true}))
-  });
-  
-  gulp.task('style', function(){
-      return gulp.src([
-          'node_modules/slick-carousel/slick/slick.css',
-          'node_modules/magnific-popup/dist/jquery.magnific-popup.css'
-      ])
-         .pipe(concat('libs.min.css'))
-         .pipe(cssmin())
-         .pipe(gulp.dest('app/css'))
-  
-  });
-  
-  
-  
-  gulp.task('script', function(){
-      return gulp.src([
-          'node_modules/slick-carousel/slick/slick.js',
-          'node_modules/magnific-popup/dist/jquery.magnific-popup.js'
-      ])
-         .pipe(concat('libs.min.js'))
-         .pipe(uglify())
-         .pipe(gulp.dest('app/js'))
-  
-  });
-  
-  
-  
-  gulp.task('html', function(){
-     return gulp.src('app/*.html')
-      .pipe(browserSync.reload({stream: true}))
-  });
-  
-  gulp.task('js', function(){
-     return gulp.src('app/*.js')
-      .pipe(browserSync.reload({stream: true}))
-  });
-  
-  
-  
-  gulp.task('browser-sync', function() {
-      browserSync.init({
-          server: {
-              baseDir: "app/"
-          }
-      });
-  });
-  
-  
-  gulp.task('watch', function(){
-      gulp.watch('app/scss/style.scss', gulp.parallel('sass'));
-      gulp.watch('app/*.html', gulp.parallel('html'));
-      gulp.watch('app/js/*.js', gulp.parallel('js'));
-  
-  });
-  
-  gulp.task('default', gulp.parallel('style', 'script', 'sass', 'watch', 'browser-sync'))
+
+
+    </header>
 
 
 
@@ -122,4 +107,5 @@
     <script src="js/libs.min.js"></script>
     <script src="js/main.min.js"></script>
 </body>
+
 </html>
